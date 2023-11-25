@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './Pages/HomePage.jsx';
 import CreationPage from './Pages/CreationPage.jsx';
 import ResultsPage from './Pages/ResultsPage.jsx';
+import TeamPage from './Pages/TeamPage.jsx';
+
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -13,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<HomePage />} />
         <Route path="/create" element={<CreationPage />} />
         <Route path="/results" element={<ResultsPage />} />
+        <Route path="/team" element={<TeamPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
