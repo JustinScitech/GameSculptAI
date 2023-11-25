@@ -4,22 +4,16 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-//  This is the backend to handle the API calls for the image generation
 
 dotenv.config();
 
-// Create an instance of express to serve your app
 const app = express();
 
-// Use bodyParser to parse JSON bodies into JS objects
 app.use(bodyParser.json());
 
-// Enable cors for all requests
 app.use(cors());
 
 
-
-// Define a route handler for GET requests to the root URL '/'
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
@@ -39,8 +33,8 @@ app.post('/post', async (req, res) => {
   var description = req.body.characterDescription;
   var theme = req.body.themes;
   var location = req.body.location;
-  var backgroundPrompt = `Give me a short backstory for a ${gender} ${species} named ${name} who lives in ${location} and is ${description}`;
-  var storyPrompt = `Write me a story about ${name} with the theme of ${theme} in ${location}`;
+  var backgroundPrompt = `Give me a one paragraph backstory for a ${gender} ${species} named ${name} who lives in ${location} and is ${description}`;
+  var storyPrompt = `Write me a short story about ${name} with the theme of ${theme} in ${location}`;
 
   const messageList = chatHistory.map(([input_text, completion_text]) => ({
     role: "user" === input_text ? "ChatGPT" : "user",
