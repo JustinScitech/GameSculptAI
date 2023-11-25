@@ -29,13 +29,13 @@ function CreationPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/post', formData);
-      console.log(response.data);
+      await axios.post('http://localhost:3001/post', formData);
       navigate('/results');
     } catch (error) {
       console.error('Error submitting form:', error);
     }
   };
+  
 
 
   const container = {
