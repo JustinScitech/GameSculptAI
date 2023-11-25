@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
 app.post('/post', async (req, res) => {
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
+
   });
 
   const chatHistory = []; 
@@ -37,6 +38,7 @@ app.post('/post', async (req, res) => {
   var description = req.body.characterDescription;
   var theme = req.body.themes;
   var location = req.body.location;
+
   var backgroundPrompt = `Give me a short backstory (MAXIMUM 30 words) for a ${gender} ${species} named ${name} who lives in ${location} and is ${description}`;
   var storyPrompt = `Write me a short story (MAXIMUM 30 words) about ${name} with the theme of ${theme} in ${location}`;
 
@@ -98,6 +100,7 @@ app.post('/post', async (req, res) => {
 
   console.log(info);
   res.send(info);
+
 });
 
 app.get('/post', (req, res) => {
