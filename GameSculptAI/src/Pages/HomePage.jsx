@@ -39,9 +39,11 @@ function HomePage() {
         </div>
         
         <Link to="/create">
-        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+      <div className = "button-container">
+        <button className="bg-blue-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded transition-transform transform hover:scale-105">
   GET STARTED
         </button>
+        </div>
         </Link>
         <motion.div
           className="flex"

@@ -48,7 +48,7 @@ function TeamPage() {
               <img src="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg" alt="Image of a generated character"></img>
             </image>
               <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                Aiden - 1st Year Uwaterloo Computer Science Student
+                Aidan - 1st Year Uwaterloo Computer Science Student
               </p>
             </div>
           </motion.div>

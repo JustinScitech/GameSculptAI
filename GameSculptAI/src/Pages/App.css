@@ -44,7 +44,7 @@
 }
 .gif-container {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   width: 100%; /* Change to 100% to cover the entire screen */
   height: 50vh; /* Change to 100vh to cover the entire screen */
   overflow: hidden; /* Hide overflowing content */
@@ -58,6 +58,10 @@
   image-rendering: pixelated;
   filter: blur(8px);
 
+}
+.button-container {
+  position: relative;
+  z-index: 3; /* Set a higher z-index than the background, gif-container, and text-content */
 }
 
 .text-content {
