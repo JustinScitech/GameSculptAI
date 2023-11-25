@@ -1,96 +1,44 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+    filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+    filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
 }
 
 .card {
-  padding: 2em;
+    padding: 2em;
 }
 
 .read-the-docs {
-  color: #888;
-}
-
-/* Adjust the background animation for a pixel art style */
-@keyframes gameAnimation {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
-body {
-  margin: 0;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
-}
-
-.gif-container {
-  position: absolute;
-  z-index: -1;
-  width: 100%; /* Change to 100% to cover the entire screen */
-  height: 50vh; /* Change to 100vh to cover the entire screen */
-  overflow: hidden; /* Hide overflowing content */
-  top: 0;
-}
-
-.gif-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Maintain aspect ratio and cover the container */
-}
-
-.text-content {
-  z-index: 1;
-  text-align: center;
-  color: #fff;
-  position: relative; /* Ensure the z-index works properly */
-}
-button {
-  padding: 10px 20px; /* Increase padding for a more button-like appearance */
-  background-color: #6D52C1;
-  color: #fff;
-  border: 2px solid #fff; /* Add border for a pixel art style */
-  cursor: pointer;
-  font-family: 'Press Start 2P', cursive;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #A1261D;
+    color: #888;
 }
