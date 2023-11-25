@@ -25,7 +25,7 @@ function ResultsPage() {
     setIsLoading(true); // Set loading to true when the data fetch begins
     const fetchPrompt = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/post');
+        const response = await axios.get('http://127.0.0.1:3001/post');
         setInfo(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
