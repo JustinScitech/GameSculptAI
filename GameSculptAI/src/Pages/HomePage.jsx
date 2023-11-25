@@ -37,24 +37,27 @@ function HomePage() {
           </h1>
           </div>
         </div>
-        
-        <Link to="/create">
+        <div>
+        <motion.div
+  className="flex button-container"
+  variants={container}
+  initial="hidden"
+  animate="visible"
+>
+          <Link to="/create">
         <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
   GET STARTED
         </button>
         </Link>
-        <motion.div
-          className="flex"
-          variants={container}
-          initial="hidden"
-          animate="visible"
-        >
-          <h1></h1>
         </motion.div>
+          </div>
+        
 
         <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
+          
+
           <motion.div
-            className="flex"
+            className="flex z-10"
             variants={container}
             initial="hidden"
             animate="visible"
@@ -66,20 +69,19 @@ function HomePage() {
               rel="noopener noreferrer"
             >
               <h2 className={`mb-3 text-2xl font-semibold`}>
-                Latest Updates{" "}
+              Latest Updates{" "}
                 <span className="inline-block transition-transform group-hover:translate-x-2 motion-reduce:transform-none">
                   -&gt;
                 </span>
               </h2>
               <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                Find in-depth information about GameSculptAI on our discord
+              Find in-depth information about GameSculptAI on our discord
                 server!
               </p>
             </a>
           </motion.div>
-
           <motion.div
-            className="flex"
+            className="flex z-10"
             variants={container}
             initial="hidden"
             animate="visible"
@@ -103,7 +105,7 @@ function HomePage() {
             </a>
           </motion.div>
           <motion.div
-            className="flex mb-7"
+            className="flex z-10"
             variants={container}
             initial="hidden"
             animate="visible"

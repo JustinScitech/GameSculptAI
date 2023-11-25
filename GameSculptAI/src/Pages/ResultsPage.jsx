@@ -16,7 +16,7 @@ function ResultsPage() {
 
   const [prompt, setPrompt] = useState("Original prompt");
   const [backStory, setBackStory] = useState("Backstory");
-
+  
   return (
     <>
       <main className="flex flex-col items-center gap-5 justify-center p-24">
@@ -28,33 +28,37 @@ function ResultsPage() {
             />
           </h1>
         </div>
-        <div class="mb-1">
-          <text>
+        <div className="mb-1">
+          <p>
             {prompt}
-          </text>
+          </p>
           </div>
-          <div class="mb-3">
-          <text>
+          <div className="mb-3">
+          <p>
             {backStory}
-          </text>
+          </p>
           </div>
-          <div class="mb-3">
-            <image>
+          <div className="mb-3">
+            <div>
               <img src="https://i.imgur.com/3Z0QJ5v.png" alt="Image of a generated character"></img>
-            </image>
             </div>
-            <div class="mb-3">
-            <image>
+            </div>
+            <div className="mb-3">
+            <div>
               <img src="https://i.imgur.com/3Z0QJ5v.png" alt="Image of a generated character"></img>
-            </image>
             </div>
-        <motion.div
-          className="flex"
-          variants={container}
-          initial="hidden"
-          animate="visible"
-        >
-          <h1></h1>
+            </div>
+            <motion.div
+  className="flex button-container"
+  variants={container}
+  initial="hidden"
+  animate="visible"
+>
+          <Link to="/create">
+        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+  Download Package
+        </button>
+        </Link>
         </motion.div>
         <motion.div
             className="flex"

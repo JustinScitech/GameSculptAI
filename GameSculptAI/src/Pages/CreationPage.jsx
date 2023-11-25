@@ -13,6 +13,8 @@ function CreationPage() {
     species: "",
     gender: "",
     characterDescription: "",
+    themes: "",
+    location: ""
   });
 
   const handleChange = (e) => {
@@ -22,11 +24,12 @@ function CreationPage() {
       [name]: value
     }));
   };
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/post', formData);
+      const response = await axios.post('http://localhost:3001/post', formData);
       console.log(response.data);
       navigate('/results');
     } catch (error) {
@@ -62,37 +65,71 @@ function CreationPage() {
               <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="character-name">
                 Character Name
               </label>
-              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="character-name" type="text" placeholder="Enter Character Name" maxLength="50"/>
-            </div>
+              <input
+  onChange={handleChange}
+  className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+  id="character-name"
+  type="text"
+  placeholder="Enter Character Name"
+  maxLength="50"
+  name="characterName"
+  value={formData.characterName}
+/>
+ </div>
             <div className="w-full px-3 mb-6">
               <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="species">
                 Species
               </label>
-              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="species" type="text" placeholder="Species" maxLength="50"/>
-            </div>
+              <input
+  onChange={handleChange}
+  className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+  id="species"
+  type="text"
+  placeholder="Species"
+  maxLength="50"
+  name="species"
+  value={formData.species}
+/>
+ </div>
             <div className="w-full px-3 mb-6">
               <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="gender">
                 Gender
               </label>
-              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="gender" type="text" placeholder="Gender" maxLength="50"/>
-            </div>
+              <input
+  onChange={handleChange}
+  className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+  id="gender"
+  type="text"
+  placeholder="Gender"
+  maxLength="50"
+  name="gender"
+  value={formData.gender}
+/>
+  </div>
             <div className="w-full px-3 mb-6">
               <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="character-description">
                 Character Description
               </label>
-              <textarea className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="character-description" placeholder="Character Description" maxLength="50"></textarea>
+              <textarea
+  onChange={handleChange}
+  className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+  id="character-description"
+  name="characterDescription"
+  placeholder="Character Description"
+  maxLength="50"
+  value={formData.characterDescription}></textarea>
             </div>
             <div className="w-full px-3 mb-6">
               <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="theme-description">
                 Story/Game Themes
               </label>
-              <textarea className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="Themes" placeholder="Themes" maxLength="50"></textarea>
+              <textarea onChange={handleChange} value={formData.themes} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="Themes"   name="themes" placeholder="Themes" maxLength="50"></textarea>
             </div>
             <div className="w-full px-3 mb-6">
               <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="theme-description">
                 Location/Events
               </label>
-              <textarea className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="character-description" placeholder="Location/Event Description" maxLength="50"></textarea>
+              <textarea onChange={handleChange} value={formData.location} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="location" name="location" placeholder="Location/Event Description" maxLength="50"></textarea>
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
