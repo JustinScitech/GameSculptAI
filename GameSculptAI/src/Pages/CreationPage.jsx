@@ -30,6 +30,7 @@ function CreationPage() {
         id="large-input" 
         style={{ padding: '1.5rem', fontSize: '1.25rem', height: '10rem', width: '60rem'}}
         className="block text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none overflow-hidden"
+        minlength="10" maxlength="200" required placeholder="Enter Your Prompt Here (200 characters max)"
       />
       <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
   Submit
