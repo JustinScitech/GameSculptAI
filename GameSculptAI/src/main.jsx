@@ -5,6 +5,7 @@ import HomePage from './Pages/HomePage.jsx';
 import CreationPage from './Pages/CreationPage.jsx';
 import ResultsPage from './Pages/ResultsPage.jsx';
 import TeamPage from './Pages/TeamPage.jsx';
+import InstructionsPage from './Pages/InstructionsPage.jsx';
 
 import './index.css';
 
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/create" element={<CreationPage />} />
         <Route path="/results" element={<ResultsPage />} />
         <Route path="/team" element={<TeamPage />} />
+        <Route path="/instructions" element={<InstructionsPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

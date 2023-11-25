@@ -1,10 +1,40 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import AnimatedText from "../Components/AnimatedText.jsx";
 import { Link } from 'react-router-dom';
 
 function CreationPage() {
+
+  const [formData, setFormData] = useState({
+    characterName: "",
+    species: "",
+    gender: "",
+    characterDescription: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('/post', formData);
+      console.log(response.data);
+      navigate('/results');
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
+
   const container = {
     hidden: { opacity: 0, scale: 0 },
     visible: {
@@ -25,16 +55,54 @@ function CreationPage() {
             />
           </h1>
         </div>
-        <div class="mb-6">
-        <textarea 
-        id="large-input" 
-        style={{ padding: '1.5rem', fontSize: '1.25rem', height: '10rem', width: '60rem'}}
-        className="block text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none overflow-hidden"
-        minlength="10" maxlength="200" required placeholder="Enter Your Prompt Here (200 characters max)"
-      />
-      <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-  Submit
-        </button>
+        <div className="mb-6">
+        <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3 mb-6">
+              <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="character-name">
+                Character Name
+              </label>
+              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="character-name" type="text" placeholder="Enter Character Name" maxLength="50"/>
+            </div>
+            <div className="w-full px-3 mb-6">
+              <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="species">
+                Species
+              </label>
+              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="species" type="text" placeholder="Species" maxLength="50"/>
+            </div>
+            <div className="w-full px-3 mb-6">
+              <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="gender">
+                Gender
+              </label>
+              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="gender" type="text" placeholder="Gender" maxLength="50"/>
+            </div>
+            <div className="w-full px-3 mb-6">
+              <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="character-description">
+                Character Description
+              </label>
+              <textarea className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="character-description" placeholder="Character Description" maxLength="50"></textarea>
+            </div>
+            <div className="w-full px-3 mb-6">
+              <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="theme-description">
+                Story/Game Themes
+              </label>
+              <textarea className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="Themes" placeholder="Themes" maxLength="50"></textarea>
+            </div>
+            <div className="w-full px-3 mb-6">
+              <label className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2" htmlFor="theme-description">
+                Location/Events
+              </label>
+              <textarea className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="character-description" placeholder="Location/Event Description" maxLength="50"></textarea>
+            </div>
+          </div>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
+              <button className="bg-blue-500 hover:bg-blue-700 text-gray font-bold py-2 px-4 rounded" type="submit">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
 </div>
         <motion.div
           className="flex"

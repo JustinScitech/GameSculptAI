@@ -39,7 +39,7 @@ function HomePage() {
         </div>
         
         <Link to="/create">
-        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+        <button className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
   GET STARTED
         </button>
         </Link>
@@ -85,9 +85,9 @@ function HomePage() {
             animate="visible"
           >
             <a
-              href="https://discord.gg/DRUxnqv9Gk"
+              href="/instructions"
               className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-              target="_blank"
+              target=""
               rel="noopener noreferrer"
             >
               <h2 className={`mb-3 text-2xl font-semibold`}>
