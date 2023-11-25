@@ -4,15 +4,19 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import {useEffect, useState} from 'react';
 
 dotenv.config();
 
 const app = express();
+let info = {
+  background: "",
+  story: "",
+};
 
 app.use(bodyParser.json());
 
 app.use(cors());
-
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -20,7 +24,8 @@ app.get('/', (req, res) => {
 
 app.post('/post', async (req, res) => {
   const openai = new OpenAI({
-    apiKey: "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"
+    apiKey: process.env.OPENAI_API_KEY
+
   });
 
   const chatHistory = []; 
@@ -33,8 +38,9 @@ app.post('/post', async (req, res) => {
   var description = req.body.characterDescription;
   var theme = req.body.themes;
   var location = req.body.location;
-  var backgroundPrompt = `Give me a one paragraph backstory for a ${gender} ${species} named ${name} who lives in ${location} and is ${description}`;
-  var storyPrompt = `Write me a short story about ${name} with the theme of ${theme} in ${location}`;
+
+  var backgroundPrompt = `Give me a short backstory for a ${gender} ${species} named ${name} who lives in ${location} and is ${description} with 30 words`;
+  var storyPrompt = `Write me a short story about ${name} with the theme of ${theme} in ${location} with 100 words`;
 
   const messageList = chatHistory.map(([input_text, completion_text]) => ({
     role: "user" === input_text ? "ChatGPT" : "user",
@@ -87,11 +93,19 @@ app.post('/post', async (req, res) => {
     story: storyText,
   };
 
-  console.log(information)
-  res.send(information);
+  info = {
+    background: backgroundText,
+    story: storyText,
+  };
+
+  console.log(info);
+  res.send(info);
+
 });
 
-
+app.get('/post', (req, res) => {
+  res.json(info); // Send the stored info as JSON
+});
 
 // Start the server on the specified port
 const PORT = process.env.PORT || 3001;

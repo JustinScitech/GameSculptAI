@@ -3,6 +3,7 @@ import "./App.css";
 import { motion } from "framer-motion";
 import AnimatedText from "../Components/AnimatedText.jsx";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function ResultsPage() {
   const container = {
@@ -14,10 +15,40 @@ function ResultsPage() {
     },
   };
 
-  const [prompt, setPrompt] = useState("Original prompt");
+  
+
+  const [imageSrc, setImageSrc] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [info, setInfo] = useState({'bacgkround': '', 'story': ''});
+
+  useEffect(() => {
+    setIsLoading(true); // Set loading to true when the data fetch begins
+    const fetchPrompt = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/post');
+        setInfo(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false); // Set loading to false when the data fetch is complete
+      }
+    };
+    fetchPrompt();
+  }, []);
+
+
   const [backStory, setBackStory] = useState("Backstory");
+
+  if (isLoading) {
+    return (
+      <div>Loading...</div> 
+    );
+  }
+
+  
   
   return (
+      
     <>
       <main className="flex flex-col items-center gap-5 justify-center p-24">
         <div className="relative flex place-items-center flex-row z-[-1] before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
@@ -28,25 +59,35 @@ function ResultsPage() {
             />
           </h1>
         </div>
-        <div className="mb-1">
-          <p>
-            {prompt}
-          </p>
+        <div className="mb-1 flex flex-col items-center">
+        <AnimatedText
+              sentence="Backstory"
+              styling="text-3xl text-white font-thin"
+            />
+          <AnimatedText
+            sentence={info.background || "Loading backstory..."}
+            styling="text-1xl text-white font-thin"
+          />
+          
+        </div>
+
+          <div className="mb-3 flex flex-col items-center">
+          <AnimatedText
+              sentence="Main Story"
+              styling="text-3xl text-white font-thin"
+            />
+          <AnimatedText
+            sentence={info.story || "Loading story..."}
+            styling="text-1xl text-white font-thin"
+          />
+          
           </div>
-          <div className="mb-3">
-          <p>
-            {backStory}
-          </p>
-          </div>
-          <div className="mb-3">
-            <div>
-              <img src="https://i.imgur.com/3Z0QJ5v.png" alt="Image of a generated character"></img>
-            </div>
-            </div>
             <div className="mb-3">
-            <div>
-              <img src="https://i.imgur.com/3Z0QJ5v.png" alt="Image of a generated character"></img>
-            </div>
+            <div className="mb-3">
+          {imageSrc && (
+            <img src={imageSrc} alt="Generated character" />
+          )}
+        </div>
             </div>
             <motion.div
   className="flex button-container"
