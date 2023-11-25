@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { motion } from "framer-motion";
 import AnimatedText from "../Components/AnimatedText.jsx";
+import { Link } from 'react-router-dom';
 
 function CreationPage() {
   const container = {
@@ -18,19 +19,12 @@ function CreationPage() {
         <div className="relative flex place-items-center flex-row z-[-1] before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
           <h1 className="mb-3 text-4xl font-bold">
             <AnimatedText
-              sentence="Enter a"
+              sentence="Enter a Prompt"
               styling="bg-gradient-to-b from-cyan-500 via-blue-500 to-purple-500 bg-clip-text text-transparent"
-            />
-          </h1>
-          <h1 className="mb-3 text-4xl font-bold">
-            <AnimatedText
-              sentence="Prompt"
-              styling="text-white"
             />
           </h1>
         </div>
         
-
         <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
   GET STARTED
         </button>
