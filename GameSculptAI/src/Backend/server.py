@@ -3,6 +3,19 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 import requests
+from pymongo import MongoClient
+# from bson import ObjectId
+# import json
+from flask import jsonify
+uri = "mongodb+srv://robloxguyisawesome:robloxguyisawesome@devconnect.nkyb6ww.mongodb.net/?retryWrites=true&w=majority"
+# Create a new client and connect to the server
+client = MongoClient(uri)
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
 
 load_dotenv()
 
@@ -13,6 +26,7 @@ info = {
     "background": "",
     "story": ""
 }
+
 
 @app.route('/')
 def hello_world():
@@ -69,16 +83,21 @@ def post_story():
             "background": background_text,
             "story": story_text
         }
-
+        db = client["Gallery"]  
+        stories_collection = db["Prompts"]
+        stories_collection.insert_one(info)
     except Exception as e:
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
-
+    if '_id' in info:
+        info['_id'] = str(info['_id'])
     return jsonify(info)
 
 @app.route('/post', methods=['GET'])
 def get_story():
     return jsonify(info)
+
+
 
 if __name__ == '__main__':
     app.run(port=3001)
