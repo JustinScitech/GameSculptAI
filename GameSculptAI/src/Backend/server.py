@@ -7,7 +7,7 @@ from pymongo import MongoClient
 # from bson import ObjectId
 # import json
 from flask import jsonify
-uri = "mongodb+srv://robloxguyisawesome:robloxguyisawesome@devconnect.nkyb6ww.mongodb.net/?retryWrites=true&w=majority"
+uri = os.getenv("MONGODB_URI")
 # Create a new client and connect to the server
 client = MongoClient(uri)
 # Send a ping to confirm a successful connection
