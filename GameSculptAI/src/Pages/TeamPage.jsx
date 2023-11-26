@@ -13,6 +13,8 @@ function TeamPage() {
       transition: { type: "spring", damping: 10, stiffness: 120 },
     },
   };
+
+  
   return (
     <>
       <main className="flex flex-col items-center gap-10 justify-center p-24">

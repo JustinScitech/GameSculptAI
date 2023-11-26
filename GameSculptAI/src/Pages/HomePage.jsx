@@ -14,6 +14,17 @@ function HomePage() {
     },
   };
 
+  const floatVariants = {
+    floatUp: {
+        y: -5,
+        opacity: 0.9
+    },
+    floatDown: {
+        y: 5,
+        opacity: 1
+    }
+};
+
   return (
     <>
 
@@ -38,17 +49,26 @@ function HomePage() {
           </div>
         </div>
         <div>
+        <motion.div 
+    variants={floatVariants}
+    initial="floatUp"
+    animate="floatDown"
+    exit="floatUp"
+    transition={{ repeat: Infinity, duration: 1, ease: "easeInOut", repeatType: 'reverse' }}
+    className="mt-4">
+      <Link to="/create">
+        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+  GET STARTED
+        </button>
+        </Link>
+</motion.div>
         <motion.div
   className="flex button-container"
   variants={container}
   initial="hidden"
   animate="visible"
 >
-          <Link to="/create">
-        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-  GET STARTED
-        </button>
-        </Link>
+          
         </motion.div>
           </div>
         
