@@ -87,21 +87,10 @@ def post_story():
             raise ValueError("Invalid response from OpenAI API")
 
         
-        image_prompt = f"Create a pixel art style image of a {gender} {species} named {name}"
-        image_response = openai.Image.create(
-            model="dall-e-3",
-            prompt=image_prompt,
-            size="1024x1024",
-            quality="standard",
-            n=1
-        )
-        image_url = image_response['data'][0]['url']
-
         info = {
             "name": name,
             "backstory": backstory_text,
-            "story": story_text,
-            "image_url": image_url
+            "story": story_text
         }
         db = client["Gallery"]  
         characters = db["Prompts"]
