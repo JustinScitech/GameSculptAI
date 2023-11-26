@@ -19,7 +19,7 @@ function ResultsPage() {
 
   const [imageSrc, setImageSrc] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [info, setInfo] = useState({'bacgkround': '', 'story': ''});
+  const [info, setInfo] = useState({'name': '', 'backstory': '', 'story': ''});
 
   useEffect(() => {
     setIsLoading(true); // Set loading to true when the data fetch begins
@@ -65,7 +65,7 @@ function ResultsPage() {
               styling="text-3xl text-white font-thin"
             />
           <AnimatedText
-            sentence={info.background || "Loading backstory..."}
+            sentence={info.backstory || "Loading backstory..."}
             styling="text-1xl text-white font-thin"
           />
           

@@ -23,7 +23,7 @@ app = Flask(__name__)
 CORS(app)
 
 info = {
-    "background": "",
+    "backstory": "",
     "story": ""
 }
 
@@ -46,8 +46,9 @@ def post_story():
     theme = data['themes']
     location = data['location']
 
-    background_prompt = f"Give me a short backstory (MAXIMUM 30 words) for a {gender} {species} named {name} who lives in {location} and is {description}"
-    story_prompt = f"Write me a short story (MAXIMUM 30 words) about {name} with the theme of {theme} in {location}"
+    backstory_prompt = f"Give me a short backstory (MAXIMUM 30 words) for a {gender} {species} named {name} who lives in {location} and is {description}"
+    story_prompt = f"Write me a short story (MAXIMUM 100 words) about {name} with the theme of {theme} in {location}"
+    keywords_prompt = "Give me a few keywords from that story"
 
     headers = {
         "Authorization": f"Bearer {openai_api_key}"
@@ -65,10 +66,10 @@ def post_story():
         return response.json()
 
     try:
-        background_response = send_request(background_prompt)
-        if 'choices' in background_response and background_response['choices']:
-            last_message = background_response['choices'][0]['message']['content']
-            background_text = last_message.strip()
+        backstory_response = send_request(backstory_prompt)
+        if 'choices' in backstory_response and backstory_response['choices']:
+            last_message = backstory_response['choices'][0]['message']['content']
+            backstory_text = last_message.strip()
         else:
             raise ValueError("Invalid response from OpenAI API")
 
@@ -79,13 +80,21 @@ def post_story():
         else:
             raise ValueError("Invalid response from OpenAI API")
 
+        keywords_response = send_request(keywords_prompt)
+        if 'choices' in story_response and story_response['choices']:
+            last_message = story_response['choices'][0]['message']['content']
+            story_text = last_message.strip()
+        else:
+            raise ValueError("Invalid response from OpenAI API")
+
         info = {
-            "background": background_text,
+            "name": name,
+            "backstory": backstory_text,
             "story": story_text
         }
         db = client["Gallery"]  
-        stories_collection = db["Prompts"]
-        stories_collection.insert_one(info)
+        characters = db["Prompts"]
+        characters.insert_one(info)
     except Exception as e:
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
@@ -97,7 +106,22 @@ def post_story():
 def get_story():
     return jsonify(info)
 
+@app.route('/gallery', methods=['GET'])
+def get_character_list():
+    db = client["Gallery"] 
+    character_list = db["Prompts"]
+    filtered_character_list = []
 
+    for character in character_list.find():
+        try:
+            if character["name"] == str(character["name"]):
+                filtered_character_list.append(jsonify(character))
+            else:
+                print(jsonify({"error": "Character not found"})), 404
+
+        except Exception as e:
+            print("Error:", e)
+            return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=3001)

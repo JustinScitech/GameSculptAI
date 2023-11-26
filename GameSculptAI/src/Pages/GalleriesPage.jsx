@@ -14,6 +14,30 @@ function GalleriesPage() {
     },
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [info, setInfo] = useState({'_id':'', 'name': '', 'backstory': '', 'story': ''});
+
+  useEffect(() => {
+     setIsLoading(true); 
+    const fetchPrompt = async () => {
+       try {
+         const response = await axios.get('http://127.0.0.1:3001/gallery');
+         setInfo(response.data);
+       } catch (error) {
+         console.error('Error fetching data:', error);
+       } finally {
+         setIsLoading(false); // Set loading to false when the data fetch is complete
+       }
+     };
+     fetchPrompt();
+   }, []);
+
+   if (isLoading) {
+    return (
+      <div>Loading...</div> 
+    );
+  }
+
   return (
     <>
 
@@ -57,7 +81,10 @@ function GalleriesPage() {
               <img src="https://s3.amazonaws.com/polymagical/6131b51a-d9e4-4a7e-ba95-93317c7738ae.gif" alt="Image of a generated character"></img>
             </image>
               <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                Prompt
+                {info[0].name || "Loading backstory..."}
+              </p>
+              <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+                {info[0].backstory || "Loading backstory..."}
               </p>
             </div>
           </motion.div>
@@ -73,8 +100,11 @@ function GalleriesPage() {
               <image>
               <img src="https://s3.amazonaws.com/polymagical/f6b9dddd-5ac1-4d8f-807e-e4bb64aa57a3.gif" alt="Image of a generated character"></img>
             </image>
+            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+                {info[1].name || "Loading backstory..."}
+              </p>
               <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                Prompt
+                {info[1].backstory || "Loading backstory..."}
               </p>
             </div>
           </motion.div>
@@ -90,8 +120,11 @@ function GalleriesPage() {
               <image>
               <img src="https://s3.amazonaws.com/polymagical/e65c315c-5fd9-46a4-8773-81d5651344c5.gif" alt="Image of a generated character"></img>
             </image>
+            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+                {info[2].name || "Loading backstory..."}
+              </p>
               <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                Prompt
+                {info[2].backstory || "Loading backstory..."}
               </p>
             </div>
           </motion.div>
