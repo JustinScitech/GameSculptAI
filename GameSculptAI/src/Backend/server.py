@@ -51,7 +51,6 @@ def post_story():
         return response.json()
 
     try:
-        # Process background prompt
         background_response = send_request(background_prompt)
         if 'choices' in background_response and background_response['choices']:
             last_message = background_response['choices'][0]['message']['content']
@@ -59,7 +58,6 @@ def post_story():
         else:
             raise ValueError("Invalid response from OpenAI API")
 
-        # Process story prompt
         story_response = send_request(story_prompt)
         if 'choices' in story_response and story_response['choices']:
             last_message = story_response['choices'][0]['message']['content']
