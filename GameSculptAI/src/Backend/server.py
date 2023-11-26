@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
+load_dotenv()
 import os
 import requests
 from pymongo import MongoClient
@@ -16,8 +17,6 @@ try:
     print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
     print(e)
-
-load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -87,6 +86,7 @@ def post_story():
         else:
             raise ValueError("Invalid response from OpenAI API")
 
+        
         info = {
             "name": name,
             "backstory": backstory_text,
@@ -108,20 +108,18 @@ def get_story():
 
 @app.route('/gallery', methods=['GET'])
 def get_character_list():
-    db = client["Gallery"] 
+    db = client["Gallery"]
     character_list = db["Prompts"]
-    filtered_character_list = []
+    try:
+        characters = list(character_list.find().sort('_id', -1).limit(3))
+        for character in characters:
+            character['_id'] = str(character['_id'])
+        return jsonify(characters)
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"error": str(e)}), 500
 
-    for character in character_list.find():
-        try:
-            if character["name"] == str(character["name"]):
-                filtered_character_list.append(jsonify(character))
-            else:
-                print(jsonify({"error": "Character not found"})), 404
 
-        except Exception as e:
-            print("Error:", e)
-            return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=3001)

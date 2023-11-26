@@ -3,7 +3,8 @@ import "./App.css";
 import { motion } from "framer-motion";
 import AnimatedText from "../Components/AnimatedText.jsx";
 import { Link } from 'react-router-dom';
-
+import {useEffect} from 'react';
+import axios from 'axios';
 function GalleriesPage() {
   const container = {
     hidden: { opacity: 0, scale: 0 },
@@ -15,28 +16,28 @@ function GalleriesPage() {
   };
 
   const [isLoading, setIsLoading] = useState(false);
-  const [info, setInfo] = useState({'_id':'', 'name': '', 'backstory': '', 'story': ''});
+  const [info, setInfo] = useState([{'_id':'', 'name': '', 'backstory': '', 'story': ''}, {'_id':'', 'name': '', 'backstory': '', 'story': ''}, {'_id':'', 'name': '', 'backstory': '', 'story': ''}]);
 
   useEffect(() => {
-     setIsLoading(true); 
+    setIsLoading(true); 
     const fetchPrompt = async () => {
        try {
          const response = await axios.get('http://127.0.0.1:3001/gallery');
-         setInfo(response.data);
+         console.log(response.data); // Debugging: Log the response data
+         if(Array.isArray(response.data) && response.data.length > 0) {
+           setInfo(response.data);
+         } else {
+           console.error("Data is not an array or is empty: ", response.data);
+         }
        } catch (error) {
          console.error('Error fetching data:', error);
        } finally {
-         setIsLoading(false); // Set loading to false when the data fetch is complete
+         setIsLoading(false);
        }
-     };
-     fetchPrompt();
-   }, []);
-
-   if (isLoading) {
-    return (
-      <div>Loading...</div> 
-    );
-  }
+    };
+    fetchPrompt();
+  }, []);
+  
 
   return (
     <>
@@ -77,15 +78,27 @@ function GalleriesPage() {
             <div
               className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
             >
-              <image>
+
               <img src="https://s3.amazonaws.com/polymagical/6131b51a-d9e4-4a7e-ba95-93317c7738ae.gif" alt="Image of a generated character"></img>
-            </image>
-              <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                {info[0].name || "Loading backstory..."}
-              </p>
-              <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                {info[0].backstory || "Loading backstory..."}
-              </p>
+              <div className="flex flex-col items-center">
+
+          
+
+              <p className ="text-1xl text-white font-thin text-center items-center">
+  {info[0].name || "Name"}</p>
+          
+  
+
+      <AnimatedText
+            sentence={info[0].backstory || "Loading backstory..."}
+            styling="text-1xl text-white font-thin"
+          />
+
+    <AnimatedText
+            sentence={info[0].story || "Loading backstory..."}
+            styling="text-1xl text-white font-thin"
+          />
+    </div>
             </div>
           </motion.div>
           <motion.div
@@ -97,15 +110,26 @@ function GalleriesPage() {
             <div
               className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
             >
-              <image>
               <img src="https://s3.amazonaws.com/polymagical/f6b9dddd-5ac1-4d8f-807e-e4bb64aa57a3.gif" alt="Image of a generated character"></img>
-            </image>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                {info[1].name || "Loading backstory..."}
-              </p>
-              <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                {info[1].backstory || "Loading backstory..."}
-              </p>
+              <div className="flex flex-col items-center">
+
+          
+
+<p className ="text-1xl text-white font-thin text-center items-center">
+  {info[1].name || "Name"}</p>
+          
+    
+    
+      <AnimatedText
+            sentence={info[1].backstory || "Loading backstory..."}
+            styling="text-1xl text-white font-thin text-center items-cente"
+          />
+ 
+    <AnimatedText
+            sentence={info[1].story || "Loading backstory..."}
+            styling="text-1xl text-white font-thin "
+          />
+    </div>
             </div>
           </motion.div>
           <motion.div
@@ -117,15 +141,28 @@ function GalleriesPage() {
             <div
               className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
             >
-              <image>
+        
               <img src="https://s3.amazonaws.com/polymagical/e65c315c-5fd9-46a4-8773-81d5651344c5.gif" alt="Image of a generated character"></img>
-            </image>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                {info[2].name || "Loading backstory..."}
-              </p>
-              <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                {info[2].backstory || "Loading backstory..."}
-              </p>
+       
+              <div className="flex flex-col items-center">
+
+          
+              <p className ="text-1xl text-white font-thin text-center items-center">
+  {info[2].name || "Name"}</p>
+          
+    
+    
+      
+      <AnimatedText
+            sentence={info[2].backstory || "Loading backstory..."}
+            styling="text-1xl text-white font-thin"
+          />
+    
+    <AnimatedText
+            sentence={info[2].story || "Loading backstory..."}
+            styling="text-1xl text-white font-thin"
+          />
+    </div>
             </div>
           </motion.div>
           
